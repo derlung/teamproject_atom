@@ -1,8 +1,14 @@
 import os
 import sys,io
+# from statistics import total,definite,treat,death
 
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(),encoding="utf-8")
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(),encoding="utf-8")
+
+
+def update():
+    pass
+
 
 #txt 파일 상대경로 -> 절대경로
 path=os.path.join(os.path.dirname(__file__), 'resource/국내확진자_추이.txt')
@@ -11,9 +17,9 @@ path=os.path.join(os.path.dirname(__file__), 'resource/국내확진자_추이.tx
 f = open(path,'r')
 lines = f.readlines()
 
-# N: 개수 S:시작날짜 인덱스
-N=5
-S=5
+# N: 개수 S:끝날짜 인덱스
+N=20
+S=0
 
 #데이터 초기화
 daily_definite =[]
@@ -27,8 +33,8 @@ total_treate=[]
 total_death =[]
 
 #가져올 날짜에 해당하는 데이터 가져오기
-for i in range(S,S-N,-1):
-    line = lines[-i].splitlines()[0].split("\t")
+for i in range(S-N,S,1):
+    line = lines[i].splitlines()[0].split("\t")
     days.append(line[0])
 
     del(line[0])
@@ -41,6 +47,7 @@ for i in range(S,S-N,-1):
     total_definite.append(line[3])
     total_treate.append(line[4])
     total_death.append(line[5])
+
 
 
 
