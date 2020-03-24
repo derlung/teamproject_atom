@@ -16,7 +16,7 @@ class MainDialog(QDialog):
         bars=["확진자","완치자","사망자"]
         values = [daily_definite , #확진자
                   daily_treate,                 #완치자
-                  daily_death  ]               #사망자
+                  daily_death    ]              #사망자33
         ind = np.arange(N)
         width = 0.35
 

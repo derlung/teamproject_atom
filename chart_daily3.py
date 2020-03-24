@@ -7,7 +7,8 @@ import matplotlib.pyplot as plt
 from matplotlib import font_manager, rc
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-from xsldata_read import *
+# from xsldata_read import *
+from txtdata_read import *
 
 font_name = font_manager.FontProperties(fname="c:/Windows/Fonts/malgun.ttf").get_name()
 rc('font', family=font_name)
@@ -17,9 +18,11 @@ class MyWindow(QWidget):
         super().__init__()
         self.initUI()
 
+
 #UI 크기
         self.setLayout(self.layout)
         self.setGeometry(200, 200, 800, 600)
+
 
 #UI초기화
     def initUI(self):
@@ -27,9 +30,11 @@ class MyWindow(QWidget):
         self.fig = plt.Figure()
         self.canvas = FigureCanvas(self.fig)
 
+
 #vertical BoxLayout () - 수평
         layout = QVBoxLayout()
         layout.addWidget(self.canvas)
+
 
 #버튼 (그래프 선택)
         self.dailyButton = QPushButton("일일 통계")
@@ -82,6 +87,9 @@ class MyWindow(QWidget):
         ax.set_xticklabels(days)
         ax.set_xticks(ind+width/20) #X축 라벨의 글자가 하나씩 밀려서 사용
         ax.plot(ind,values[2],color="blue",label=bars[2])
+        for p in ax.patches:
+            left, bottom, width, height = p.get_bbox().bounds
+            ax.annotate("%d"%(height), (left+width/2, height*1.01), ha='center')
 
 
         ax.legend()
