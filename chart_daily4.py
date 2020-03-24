@@ -8,6 +8,7 @@ from matplotlib import font_manager, rc
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from txtdata_read import *
+import mplcursors
 
 #그래프 양쪽 범례 사용
 
@@ -97,11 +98,18 @@ class MyWindow(QWidget):
             ax.annotate("%d"%(height), (left+width/2, height*1.01), ha='center')
 
         # Solution for having two legends
-
-        ax.legend(handles=(grap_def,grap_treat,grap_death),labels=('확진자','완치자','사망자'))
-
+        cursor1 = mplcursors.cursor([grap_def,grap_treat],hover=True)
+        # cursor1.connect("add", lambda sel: sel.annotation.set_text(days[sel.target.index]))
+        cursor1.connect("add",lambda sel:sel.annotation.set_text(days[sel.target.index]))
+        cursor2=mplcursors.cursor([grap_def,grap_treat])
+        cursor2.connect("add",self.click_cursor)
         self.canvas.draw()
 
+
+    def click_cursor(self,sel):
+        print(days[sel.target.index])
+        sel.annotation.set_bbox(None)
+        sel.annotation.set_text(None)
 #그래프2
     def totalGraph(self):
         self.setGeometry(200, 200, 1000, 600)
