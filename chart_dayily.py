@@ -16,13 +16,16 @@ class MainDialog(QDialog):
         ind = np.arange(N)
         width = 0.35
 
+
         #그래프 창 가져오기
         fig = plt.Figure()
         ax = fig.add_subplot(111)
 
+
         #y축 라벨, 타이틀 이름
         plt.ylabel('명')
         plt.title('일일 코로나 추이')
+
 
         #그래프 바x축 위치 정하기 및 그래프 창에 붙이기
         for i in range(len(values)-1):
@@ -37,10 +40,12 @@ class MainDialog(QDialog):
         canvas = FigureCanvas(fig)
         canvas.draw()
 
+
         lay = QHBoxLayout()
         self.setLayout(lay)
         lay.addWidget(canvas)
         canvas.show()
+
 
 #xticks = x축개수, width = bar넓이 , i번째바 , ind = 바개수
     def compute_pos(self,xticks, width, i, models):
@@ -48,6 +53,7 @@ class MainDialog(QDialog):
         n = len(models)-1
         correction = i-0.5*(n-1)
         return ind + width*correction
+
 
 app = QApplication(sys.argv)
 main = MainDialog()

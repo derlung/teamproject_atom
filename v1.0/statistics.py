@@ -17,6 +17,10 @@ definite=soup.select_one("body > div > div.mainlive_container > div.container > 
 treat=soup.select_one("body > div > div.mainlive_container > div.container > div > div.liveboard_layout > div.liveNumOuter > div > ul > li:nth-child(3) > span.num").text
 death=soup.select_one("body > div > div.mainlive_container > div.container > div > div.liveboard_layout > div.liveNumOuter > div > ul > li:nth-child(4) > span.num").text
 
+today_definite = soup.select_one("body > div > div.mainlive_container > div.container > div > div.liveboard_layout > div.liveNumOuter > div > ul > li:nth-child(1) > span.before").text[8:-1]
+today_death = soup.select_one("body > div > div.mainlive_container > div.container > div > div.liveboard_layout > div.liveNumOuter > div > ul > li:nth-child(4) > span.before").text[3:-1]
+today_treate = soup.select_one("body > div > div.mainlive_container > div.container > div > div.liveboard_layout > div.liveNumOuter > div > ul > li:nth-child(2) > span.before").text[3:-1]
+
 check=soup.select_one("body > div > div.mainlive_container > div.container > div > div.liveboard_layout > div.liveToggleOuter > div > div.live_left > div.liveTest.main_box_toggle > div.info_core > ul > li:nth-child(1) > span.num").text
 check_finish=soup.select_one("body > div > div.mainlive_container > div.container > div > div.liveboard_layout > div.liveToggleOuter > div > div.live_left > div.liveTest.main_box_toggle > div.info_core > ul > li:nth-child(2) > span.num").text
 definite_total=soup.select_one("body > div > div.mainlive_container > div.container > div > div.liveboard_layout > div.liveToggleOuter > div > div.live_left > div.liveTest.main_box_toggle > div.info_core > ul > li:nth-child(3) > span.num").text
@@ -43,25 +47,28 @@ death_ratio_50=soup.select_one("#content > div > div.data_table.tbl_scrl_mini2.m
 death_ratio_60=soup.select_one("#content > div > div.data_table.tbl_scrl_mini2.mini > table > tbody > tr:nth-child(13) > td:nth-child(3)").string
 death_ratio_70=soup.select_one("#content > div > div.data_table.tbl_scrl_mini2.mini > table > tbody > tr:nth-child(14) > td:nth-child(3)").string
 death_ratio_80=soup.select_one("#content > div > div.data_table.tbl_scrl_mini2.mini > table > tbody > tr:nth-child(15) > td:nth-child(3)").string
-
-print('확진환자 : '+total)
-print('완치환자 : '+definite)
-print('치료 중 환자 : '+treat)
-print('사망 : '+death)
-print('누적 검사 수 : '+check)
-print('누적 검사 완료 수 : '+check_finish)
-print('누적 확진률 : '+definite_total)
-print('검사 중 : '+treatment)
-print('결과 양성 : '+positive)
-print('결과 음성 : '+negative)
-print('남성비 : '+gender_m)
-print('여성비 : '+gender_w)
-print('30대 치사율 : '+death_ratio_30)
-print('40대 치사율 : '+death_ratio_40)
-print('50대 치사율 : '+death_ratio_50)
-print('60대 치사율 : '+death_ratio_60)
-print('70대 치사율 : '+death_ratio_70)
-print('80대 치사율 : '+death_ratio_80)
-print('전일 대비 확진환자 : '+yesterday)
-print('전일 대비 완치환자 : '+yesterday_treatment)
-print('전일 대비 사망 : '+yesterday_death)
+#
+# print('확진환자 : '+total)
+# print('완치환자 : '+definite)
+# print('치료 중 환자 : '+treat)
+# print('오늘 확진환자 : '+today_definite)
+# print('오늘 완치환자 : '+today_treate)
+# print('오늘 사망 환자 : '+today_death)
+# print('사망 : '+death)
+# print('누적 검사 수 : '+check)
+# print('누적 검사 완료 수 : '+check_finish)
+# print('누적 확진률 : '+definite_total)
+# print('검사 중 : '+treatment)
+# print('결과 양성 : '+positive)
+# print('결과 음성 : '+negative)
+# print('남성비 : '+gender_m)
+# print('여성비 : '+gender_w)
+# print('30대 치사율 : '+death_ratio_30)
+# print('40대 치사율 : '+death_ratio_40)
+# print('50대 치사율 : '+death_ratio_50)
+# print('60대 치사율 : '+death_ratio_60)
+# print('70대 치사율 : '+death_ratio_70)
+# print('80대 치사율 : '+death_ratio_80)
+# print('전일 대비 확진환자 : '+yesterday)
+# print('전일 대비 완치환자 : '+yesterday_treatment)
+# print('전일 대비 사망 : '+yesterday_death)
