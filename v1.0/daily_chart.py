@@ -39,14 +39,12 @@ class MyWindow(QWidget):
         layout = QVBoxLayout()
         layout.addWidget(self.canvas)
 
-
 #QWidget.layout 안에 방금 만든 QVBoxLayout()를 넣는다는 느낌
         self.layout = layout
-        num = self.txtd.getNum()
-        print(num)
-        self.dailyGraph(num-1,5)
+        self.num = self.txtd.getNum()
+        self.dailyGraph(self.num,5)
 #그래프1  현재 ComboBox에서 선택된 항목의 글자를 반환합니다.
-    def dailyGraph(self,S,N):
+    def dailyGraph(self,S,N,c1,c2,c3):
         self.txtd.getDaily(S,N)
         N=5
         bars=["확진자","완치자","사망자"]
@@ -91,7 +89,6 @@ class MyWindow(QWidget):
 
 
     def click_cursor(self,sel):
-        print(days[sel.target.index])
         sel.annotation.set_bbox(None)
         sel.annotation.set_text(None)
 

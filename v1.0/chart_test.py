@@ -24,12 +24,12 @@ class Main(QMainWindow,Ui_MainWindow):
         self.dchart.setGeometry(QtCore.QRect(40, 50, 421, 321))
         self.tchart=tcht(self.page_2)
         self.tchart.setGeometry(QtCore.QRect(40, 50, 421, 321))
+        self.stackedWidget.setCurrentIndex(0)
 
     #기본 UI 비활성화
     def initAuthLock(self):
         # self.previewButton.setEnabled(False)
         pass
-
 
     #시그널 초기화
     def initSignal(self):

@@ -36,7 +36,7 @@ class txtdata:
         today = str(now.month)+"월 "+str(now.day)+"일"
         date1 = datetime.strptime(lastdate,"%m월 %d일")
         date2 = datetime.strptime(today,"%m월 %d일")
-        if date2>date1 :
+        if date2>=date1 :
             return
         else:
             #txt 파일 상대경로 -> 절대경로
@@ -81,7 +81,6 @@ class txtdata:
             self.daily_definite.append(line[0])
             self.daily_treate.append(line[1])
             self.daily_death.append(line[2])
-
 
     #가져올 날짜에 해당하는 데이터 가져오기
     # N: 개수 S:끝날짜 인덱스
