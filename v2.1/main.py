@@ -1,17 +1,18 @@
 import sys
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
-from PyQt5.QtCore import pyqtSlot, pyqtSignal, QUrl, QThread
 from PyQt5 import uic
 import re
 import datetime
 import test
-from PyQt5 import QtWebEngineWidgets, QtCore
 import re
 import datetime
 from UI_Main import Ui_MainWindow
 import sys, io
 from PyQt5.QtMultimedia import QSound
+#차트 import
+import daily_chart1
+import total_chart1
 
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(),encoding='utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(),encoding='utf-8')
@@ -29,6 +30,9 @@ class Main(QMainWindow,Ui_MainWindow):
         self.stackedWidget.setCurrentIndex(0)
         self.stackedWidget_local_view.setCurrentIndex(0)
 
+        #차트 붙이기
+        self.chart1=daily_chart1.daily_chart(self.view_daily_chart)
+        self.chart2=total_chart1.total_chart(self.view_total_chart)
 
 
     def initSignal(self) :

@@ -94,11 +94,11 @@ class PlotCanvas(FigureCanvas):
 
 
     def dailyGraph(self,S,N,c1=True,c2=True,c3=True):
-        self.txtd.getDaily(S,N)
+        self.txtd.getTotal(S,N)
         bars=["확진자","완치자","사망자"]
-        values = [self.txtd.daily_definite , #확진자
-                  self.txtd.daily_treate,    #완치자
-                  self.txtd.daily_death  ]   #사망자
+        values = [self.txtd.total_definite , #확진자
+                  self.txtd.total_treate,    #완치자
+                  self.txtd.total_death  ]   #사망자
         ind = np.arange(N)
         width = 0.35
 

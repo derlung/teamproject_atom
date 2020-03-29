@@ -52,7 +52,7 @@ class Ui_Form(object):
         self.cb_treate.setText(_translate("Form", "완치자"))
         self.cb_death.setText(_translate("Form", "사망자"))
         self.groupBox_2.setTitle(_translate("Form", "GroupBox"))
-        self.label.setText(_translate("Form", "TextLabel"))
+        self.label.setText(_translate("Form", "123TextLabel1123"))
         self.label_2.setText(_translate("Form", "TextLabel"))
 
 

@@ -19,6 +19,15 @@ class txtdata:
         self.total_death =[]
         self.lines=[]
 
+        #최대값변수
+        self.max_ddef=0
+        self.max_dtre=0
+        self.max_ddeth=0
+
+        self.max_tdef=0
+        self.max_ttre=0
+        self.max_tdeth=0
+
         #한글 깨짐 방지
         sys.stderr = io.TextIOWrapper(sys.stderr.detach(),encoding="utf-8")
         sys.stdout = io.TextIOWrapper(sys.stdout.detach(),encoding="utf-8")
@@ -28,6 +37,8 @@ class txtdata:
         self.read()
         #데이터 업데이트
         self.update()
+        #최댓값 변수 설정
+        self.getMax()
 
     #데이터 업데이트
     def update(self):
@@ -110,12 +121,24 @@ class txtdata:
                 return i.splitlines()[0].split("\t")
 
     #그래프이용하기위해 값 가장 높은 거 가져오기
-    #일일
-    def getMax_daily(self):
+    def getMax(self):
+        definite_d=[]
+        treate_d = []
+        death_d=[]
+        definite_t=[]
+        treate_t = []
+        death_t=[]
         for i in self.lines:
-
-            pass
-    #그래프이용하기위해 값 가장 높은 거 가져오기
-    #일일
-    def getMax_total(self):
-        pass
+            line = i.splitlines()[0].split("\t")
+            definite_d.append(int(line[1]))
+            treate_d.append(int(line[2]))
+            death_d.append(int(line[3]))
+            definite_t.append(int(line[4]))
+            treate_t.append(int(line[5]))
+            death_t.append(int(line[6]))
+        self.max_ddef=max(definite_d)
+        self.max_dtre=max(treate_d)
+        self.max_ddeth=max(death_d)
+        self.max_tdef=max(definite_t)
+        self.max_ttre=max(treate_t)
+        self.max_tdeth=max(death_t)

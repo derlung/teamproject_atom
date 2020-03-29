@@ -1,22 +1,21 @@
-from chart_ui2 import Ui_Form
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import *
+from test_0327 import Ui_Form
 import sys
 import numpy as np
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
+import matplotlib.pyplot as plt
 from matplotlib import font_manager, rc
 from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
-import txtdata_read
+import matplotlib.pyplot as plt
+import txtdata_read1
 import mplcursors
 import random
 
-
 class total_chart(QWidget,Ui_Form):
-    def __init__(self,parent):
-        QDialog.__init__(self,parent)
+    def __init__(self,parent=None):
+        QWidget.__init__(self,parent)
         self.setupUi(self)
         font_name = font_manager.FontProperties(fname="c:/Windows/Fonts/malgun.ttf").get_name()
         rc('font', family=font_name)
@@ -32,21 +31,21 @@ class total_chart(QWidget,Ui_Form):
         self.c2=True
         self.c3=True
 
-        #차트 생성 및 초기화
-        self.m = PlotCanvas(self, width=7, height=5)
-        self.m.move(20,30)
-        self.m.totalGraph(50,5,self.c1,self.c2,self.c3)
-
         #콤보박스 모두 체크로 셋팅
         self.cb_definite.setChecked(True)
         self.cb_treate.setChecked(True)
         self.cb_death.setChecked(True)
+
+        #차트 생성 및 초기화
+        self.m = PlotCanvas(self, width=6, height=6)
+        self.m.move(200,20)
 
         #스크롤바
         self.ScrollbarDate.setMinimum(5)
         self.ScrollbarDate.setMaximum(self.m.getdateNum())
         self.ScrollbarDate.setValue(self.ScrollbarDate.maximum())
         self.date=self.ScrollbarDate.maximum()
+        self.m.totalGraph(self.date,5,self.c1,self.c2,self.c3)
 
 #시그널 초기화
     def initSignal(self):
@@ -65,14 +64,22 @@ class total_chart(QWidget,Ui_Form):
 
 #슬라이더바 변경시 날짜 변경
     def datechange(self):
-        self.label.setText(str(self.ScrollbarDate.value()))
         self.date=self.ScrollbarDate.value()
         self.m.totalGraph(self.date,5,self.c1,self.c2,self.c3)
 
 
+    #그래프 클릭시 날짜별 상세정보 보여주기
+    def setDetailLabel(self,detail):
+        self.la_dailydef.setText(detail[1])
+        self.la_dailytre.setText(detail[2])
+        self.la_dailydeth.setText(detail[3])
+        self.la_totaldef.setText(detail[4])
+        self.la_totaltre.setText(detail[5])
+        self.la_totaldeth.setText(detail[6])
+
 #차트
 class PlotCanvas(FigureCanvas):
-    txtd = txtdata_read.txtdata()
+    txtd = txtdata_read1.txtdata()
     def __init__(self, parent=None, width=8, height=6, dpi=100):
         fig = Figure(figsize=(width, height), dpi=dpi)
 
@@ -84,12 +91,10 @@ class PlotCanvas(FigureCanvas):
                 QSizePolicy.Expanding)
         FigureCanvas.updateGeometry(self)
         self.num = self.txtd.getNum()
-        # self.totalGraph(self.num,5,True,True,True)
 
 
     def totalGraph(self,S,N,c1=True,c2=True,c3=True):
         self.txtd.getTotal(S,N)
-        N=5
         bars=["확진자","완치자","사망자"]
         values = [self.txtd.total_definite , #확진자
                   self.txtd.total_treate,    #완치자
@@ -110,7 +115,9 @@ class PlotCanvas(FigureCanvas):
         cursor_list = []
         #그래프 개수 (체크박스에 따라)
         bar_num=1
+        c2_num = 0
         if(c1==True):
+            c2_num=1
             bar_num+=1
         if(c2==True):
             bar_num+=1
@@ -122,39 +129,50 @@ class PlotCanvas(FigureCanvas):
             cursor_list.append(grap_def)
 
         if(c2==True):
-            indx = self.compute_pos(N,width,1,bar_num)
+            indx = self.compute_pos(N,width,c2_num,bar_num)
             grap_treat=ax.bar(indx,values[1],width,color='#7cc26e',label=bars[1])
             cursor_list.append(grap_treat)
+
 
         #x축 라벨 만들기
         ax.set_xticklabels(self.txtd.total_days)
         ax.set_xticks(ind+width/20) #X축 라벨의 글자가 하나씩 밀려서 사용
-        # Put a legend to the right of the current axis
-        ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+        ax.set_ylim(0,self.txtd.max_tdef+self.txtd.max_tdef*0.1)
+        ax.legend(loc="upper left",bbox_to_anchor=(-0.1, 1.1),
+          fancybox=True, shadow=True, ncol=5)
 
         #오른쪽 범례 그래프 만들기
 
         if(c3==True):
             ax2 = ax.twinx()
-            grap_death=ax2.plot(ind,values[2],color='#121149',label=bars[2])
-            ax2.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+            grap_death=ax2.plot(ind,values[2],ls="--", marker="o",color='#121149',label=bars[2],ms=5)
+            ax2.set_ylim(0,self.txtd.max_tdeth+self.txtd.max_tdeth*0.7)
+            ax2.legend()
+
+
         for p in ax.patches:
             left, bottom, width, height = p.get_bbox().bounds
             ax.annotate("%d"%(height), (left+width/2, height*1.01), ha='center')
 
 
         if len(cursor_list)>0:
+            # Solution for having two legends
             cursor1 = mplcursors.cursor(cursor_list,hover=True)
             cursor1.connect("add",lambda sel:sel.annotation.set_text(self.txtd.total_days[sel.target.index]))
             cursor2=mplcursors.cursor(cursor_list)
             cursor2.connect("add",self.click_cursor)
 
+
         self.draw()
 
 
+
+    #그래프 클릭 메소드
     def click_cursor(self,sel):
         sel.annotation.set_bbox(None)
         sel.annotation.set_text(None)
+        detail = self.txtd.getDetail(self.txtd.total_days[sel.target.index])
+        self.parent().setDetailLabel(detail)
 
 
 #xticks = x축개수, width = bar넓이 , i번째바 , ind = 바개수
@@ -167,7 +185,8 @@ class PlotCanvas(FigureCanvas):
     def getdateNum(self):
         return self.txtd.getNum()
 
-app = QApplication(sys.argv)
-dlg =total_chart()
-dlg.show()
-app.exec_()
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    dlg =total_chart()
+    dlg.show()
+    app.exec_()
