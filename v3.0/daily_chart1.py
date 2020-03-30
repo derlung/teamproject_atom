@@ -13,7 +13,7 @@ import txtdata_read1
 import mplcursors
 import random
 
-class total_chart(QWidget,Ui_Form):
+class daily_chart(QWidget,Ui_Form):
     def __init__(self,parent=None):
         QWidget.__init__(self,parent)
         self.setupUi(self)
@@ -21,7 +21,6 @@ class total_chart(QWidget,Ui_Form):
         rc('font', family=font_name)
         self.initUI()
         self.initSignal()
-
 
 #UI초기화
     def initUI(self):
@@ -37,15 +36,16 @@ class total_chart(QWidget,Ui_Form):
         self.cb_death.setChecked(True)
 
         #차트 생성 및 초기화
-        self.m = PlotCanvas(self, width=6, height=6)
-        self.m.move(200,20)
+        self.m = PlotCanvas(self, width=6, height=7.6)
+        self.m.move(185,-75)
 
         #스크롤바
         self.ScrollbarDate.setMinimum(5)
         self.ScrollbarDate.setMaximum(self.m.getdateNum())
         self.ScrollbarDate.setValue(self.ScrollbarDate.maximum())
         self.date=self.ScrollbarDate.maximum()
-        self.m.totalGraph(self.date,5,self.c1,self.c2,self.c3)
+        self.m.dailyGraph(self.date,5,self.c1,self.c2,self.c3)
+        self.ScrollbarDate.raise_()
 
 #시그널 초기화
     def initSignal(self):
@@ -60,16 +60,26 @@ class total_chart(QWidget,Ui_Form):
         self.c1=self.cb_definite.isChecked()
         self.c2=self.cb_treate.isChecked()
         self.c3=self.cb_death.isChecked()
-        self.m.totalGraph(self.date,5,self.c1,self.c2,self.c3)
+        self.m.dailyGraph(self.date,5,self.c1,self.c2,self.c3)
 
 #슬라이더바 변경시 날짜 변경
     def datechange(self):
         self.date=self.ScrollbarDate.value()
-        self.m.totalGraph(self.date,5,self.c1,self.c2,self.c3)
+        self.m.dailyGraph(self.date,5,self.c1,self.c2,self.c3)
 
 
     #그래프 클릭시 날짜별 상세정보 보여주기
     def setDetailLabel(self,detail):
+        self.la_date.setText("<font color=red>"+detail[0]+"</font>")
+        self.la_dailydef.setText(detail[1])
+        self.la_dailytre.setText(detail[2])
+        self.la_dailydeth.setText(detail[3])
+        self.la_totaldef.setText(detail[4])
+        self.la_totaltre.setText(detail[5])
+        self.la_totaldeth.setText(detail[6])
+
+    #그래프 클릭시 날짜별 상세정보 보여주기
+    def setinitDetail(self,detail):
         self.la_date.setText("<font color=red>"+detail[0]+"</font>")
         self.la_dailydef.setText(detail[1])
         self.la_dailytre.setText(detail[2])
@@ -94,12 +104,12 @@ class PlotCanvas(FigureCanvas):
         self.num = self.txtd.getNum()
 
 
-    def totalGraph(self,S,N,c1=True,c2=True,c3=True):
-        self.txtd.getTotal(S,N)
+    def dailyGraph(self,S,N,c1=True,c2=True,c3=True):
+        self.txtd.getDaily(S,N)
         bars=["확진자","완치자","사망자"]
-        values = [self.txtd.total_definite , #확진자
-                  self.txtd.total_treate,    #완치자
-                  self.txtd.total_death  ]   #사망자
+        values = [self.txtd.daily_definite , #확진자
+                  self.txtd.daily_treate,    #완치자
+                  self.txtd.daily_death  ]   #사망자
         ind = np.arange(N)
         width = 0.35
 
@@ -108,7 +118,7 @@ class PlotCanvas(FigureCanvas):
         ax = self.figure.add_subplot(111)
         #y축 라벨, 타이틀 이름
         ax.set_ylabel('인원(단위 : 명)')
-        ax.set_title('누적 코로나 추이')
+        # ax.set_title('일일 코로나 추이')
 
         grap_def=None
         grap_treat=None
@@ -136,18 +146,19 @@ class PlotCanvas(FigureCanvas):
 
 
         #x축 라벨 만들기
-        ax.set_xticklabels(self.txtd.total_days)
+        ax.set_xticklabels(self.txtd.daily_days)
         ax.set_xticks(ind+width/20) #X축 라벨의 글자가 하나씩 밀려서 사용
-        ax.set_ylim(0,self.txtd.max_tdef+self.txtd.max_tdef*0.1)
-        ax.legend(loc="upper left",bbox_to_anchor=(-0.1, 1.1),
-          fancybox=True, shadow=True, ncol=5)
+        ax.set_ylim(0,self.txtd.max_ddef+self.txtd.max_ddef*0.1)
+        ax.legend(loc="upper left")
 
         #오른쪽 범례 그래프 만들기
 
         if(c3==True):
             ax2 = ax.twinx()
             grap_death=ax2.plot(ind,values[2],ls="--", marker="o",color='#121149',label=bars[2],ms=5)
-            ax2.set_ylim(0,self.txtd.max_tdeth+self.txtd.max_tdeth*0.7)
+            ax2.set_ylim(0,self.txtd.max_ddeth+self.txtd.max_ddeth*0.7)
+            for i in range(len(values[2])):
+                ax2.annotate("%d"%(values[2][i]),(ind[i]-0.04,values[2][i]+0.18),color="red")
             ax2.legend()
 
 
@@ -159,7 +170,7 @@ class PlotCanvas(FigureCanvas):
         if len(cursor_list)>0:
             # Solution for having two legends
             cursor1 = mplcursors.cursor(cursor_list,hover=True)
-            cursor1.connect("add",lambda sel:sel.annotation.set_text(self.txtd.total_days[sel.target.index]))
+            cursor1.connect("add",lambda sel:sel.annotation.set_text(self.txtd.daily_days[sel.target.index]))
             cursor2=mplcursors.cursor(cursor_list)
             cursor2.connect("add",self.click_cursor)
 
@@ -172,7 +183,7 @@ class PlotCanvas(FigureCanvas):
     def click_cursor(self,sel):
         sel.annotation.set_bbox(None)
         sel.annotation.set_text(None)
-        detail = self.txtd.getDetail(self.txtd.total_days[sel.target.index])
+        detail = self.txtd.getDetail(self.txtd.daily_days[sel.target.index])
         self.parent().setDetailLabel(detail)
 
 
@@ -188,6 +199,6 @@ class PlotCanvas(FigureCanvas):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    dlg =total_chart()
+    dlg =daily_chart()
     dlg.show()
     app.exec_()

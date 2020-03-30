@@ -1,4 +1,4 @@
-from test_0327 import Ui_Form
+from test0327 import Ui_Form
 import sys
 import numpy as np
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -37,8 +37,8 @@ class daily_chart(QWidget,Ui_Form):
         self.cb_death.setChecked(True)
 
         #차트 생성 및 초기화
-        self.m = PlotCanvas(self, width=6, height=6)
-        self.m.move(200,20)
+        self.m = PlotCanvas(self, width=6, height=7.6)
+        self.m.move(185,-75)
 
         #스크롤바
         self.ScrollbarDate.setMinimum(5)
@@ -46,6 +46,7 @@ class daily_chart(QWidget,Ui_Form):
         self.ScrollbarDate.setValue(self.ScrollbarDate.maximum())
         self.date=self.ScrollbarDate.maximum()
         self.m.dailyGraph(self.date,5,self.c1,self.c2,self.c3)
+        self.ScrollbarDate.raise_()
 
 #시그널 초기화
     def initSignal(self):
@@ -70,6 +71,17 @@ class daily_chart(QWidget,Ui_Form):
 
     #그래프 클릭시 날짜별 상세정보 보여주기
     def setDetailLabel(self,detail):
+        self.la_date.setText("<font color=red>"+detail[0]+"</font>")
+        self.la_dailydef.setText(detail[1])
+        self.la_dailytre.setText(detail[2])
+        self.la_dailydeth.setText(detail[3])
+        self.la_totaldef.setText(detail[4])
+        self.la_totaltre.setText(detail[5])
+        self.la_totaldeth.setText(detail[6])
+
+    #그래프 클릭시 날짜별 상세정보 보여주기
+    def setinitDetail(self,detail):
+        self.la_date.setText("<font color=red>"+detail[0]+"</font>")
         self.la_dailydef.setText(detail[1])
         self.la_dailytre.setText(detail[2])
         self.la_dailydeth.setText(detail[3])
@@ -107,7 +119,7 @@ class PlotCanvas(FigureCanvas):
         ax = self.figure.add_subplot(111)
         #y축 라벨, 타이틀 이름
         ax.set_ylabel('인원(단위 : 명)')
-        ax.set_title('일일 코로나 추이')
+        # ax.set_title('일일 코로나 추이')
 
         grap_def=None
         grap_treat=None
@@ -146,6 +158,8 @@ class PlotCanvas(FigureCanvas):
             ax2 = ax.twinx()
             grap_death=ax2.plot(ind,values[2],ls="--", marker="o",color='#121149',label=bars[2],ms=5)
             ax2.set_ylim(0,self.txtd.max_ddeth+self.txtd.max_ddeth*0.7)
+            for i in range(len(values[2])):
+                ax2.annotate("%d"%(values[2][i]),(ind[i]-0.04,values[2][i]+0.18),color="red")
             ax2.legend()
 
 

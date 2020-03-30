@@ -20,7 +20,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
 
     # ★★★★★★★★★★★★★★★ 이미지 저장 경로 변경★★★★★★★★★★★★★★★★★★★
-        save="D:/teamproject/project_atom1_git/teamproject_atom/v2.1/img_source/"
+        save="D:/teamproject/project_atom1_git/teamproject_atom/v3.0/img_source/"
     # ★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 
 
@@ -56,15 +56,17 @@ class Ui_MainWindow(object):
         self.label_condition_img.setObjectName("label_condition_img")
 
         self.label_con_1 = QtWidgets.QLabel(self.group_condition)
-        self.label_con_1.setGeometry(QtCore.QRect(260, 20, 61, 31))
+        #라벨위치바꿈 ()
+        self.label_con_1.setGeometry(QtCore.QRect(270, 20, 61, 31))
         self.label_con_1.setStyleSheet("font: 20pt \"돋움\";")
         self.label_con_1.setObjectName("label_con_1")
 
         self.label_con_2 = QtWidgets.QLabel(self.group_condition)
-        self.label_con_2.setGeometry(QtCore.QRect(650, 20, 71, 31))
+        self.label_con_2.setGeometry(QtCore.QRect(660, 20, 71, 31))
         self.label_con_2.setStyleSheet("font: 20pt \"돋움\";")
         self.label_con_2.setObjectName("label_con_2")
 
+        #라벨위치바꿈
         self.label_con_3 = QtWidgets.QLabel(self.group_condition)
         self.label_con_3.setGeometry(QtCore.QRect(60, 110, 121, 101))
         self.label_con_3.setStyleSheet("font: 30pt \"돋움\";")

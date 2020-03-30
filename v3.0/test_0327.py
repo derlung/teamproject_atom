@@ -13,7 +13,12 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(700, 681)
+        Form.resize(800, 681)
+        self.background_img=QtWidgets.QLabel(Form)
+        self.background_img.setGeometry(QtCore.QRect(0,-55, 1221, 791))
+        self.background_img.setText("")
+        self.background_img.setPixmap(QtGui.QPixmap("D:/teamproject/project_atom1_git/teamproject_atom/v2.1/img_source/chart_layout.jpg"))
+        self.background_img.setObjectName("background_img")
         self.ScrollbarDate = QtWidgets.QScrollBar(Form)
         self.ScrollbarDate.setGeometry(QtCore.QRect(200, 646, 561, 20))
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
@@ -24,7 +29,7 @@ class Ui_Form(object):
         self.ScrollbarDate.setOrientation(QtCore.Qt.Horizontal)
         self.ScrollbarDate.setObjectName("ScrollbarDate")
         self.groupBox = QtWidgets.QGroupBox(Form)
-        self.groupBox.setGeometry(QtCore.QRect(10, 20, 181, 651))
+        self.groupBox.setGeometry(QtCore.QRect(0, 0, 181, 651))
         self.groupBox.setTitle("")
         self.groupBox.setObjectName("날짜 디테일 정보")
         self.la_totaldef = QtWidgets.QLabel(self.groupBox)
@@ -61,7 +66,7 @@ class Ui_Form(object):
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
         Form.setWindowTitle(_translate("Form", "Form"))
-        self.la_totaldef.setText(_translate("Form", "누적확진자"))
+        self.la_totaldef.setText(_translate("Form", "<font color='red'>누적확진자</font>"))
         self.la_totaldeth.setText(_translate("Form", "누적사망자"))
         self.la_totaltre.setText(_translate("Form", "누적완치자"))
         self.la_dailydeth.setText(_translate("Form", "사망자"))
