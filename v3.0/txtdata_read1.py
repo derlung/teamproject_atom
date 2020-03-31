@@ -55,8 +55,8 @@ class txtdata:
             #txt 파일 열기(읽기 모드)
             lastdata=self.lines[len(self.lines)-1].replace("\n","").split("\t")
             f = open(path,'a')
-            today_data = today+"\t"+today_definite+"\t"+today_treate+"\t"+today_death+"\t"
-            today_data += str(int(lastdata[4])+int(today_definite))+"\t"+str(int(lastdata[5])+int(today_treate))+"\t"+str(int(lastdata[6])+int(today_death))+"\n"
+            today_data = today+"\t"+today_definite+"\t"+today_treat+"\t"+plus_death[2:-1]+"\t"
+            today_data += str(int(lastdata[4])+int(today_definite))+"\t"+str(int(lastdata[5])+int(today_treat))+"\t"+str(int(lastdata[6])+int(today_death))+"\n"
             f.write(today_data)
             f.close()
 
@@ -73,7 +73,6 @@ class txtdata:
 
         #파일 닫기
         f.close()
-
 
     #가져올 날짜에 해당하는 데이터 가져오기
     # N: 개수 S:끝날짜 인덱스

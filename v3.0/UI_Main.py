@@ -44,29 +44,27 @@ class Ui_MainWindow(object):
 
         # 홈 - 확진자현황
         self.group_condition = QtWidgets.QGroupBox(self.home)
-        self.group_condition.setGeometry(QtCore.QRect(0, 0, 791, 261))
+        self.group_condition.setGeometry(QtCore.QRect(0, 5, 781, 261))
         self.group_condition.setTitle("")
         self.group_condition.setObjectName("group_condition")
             # 확진자현황-img
         self.label_condition_img = QtWidgets.QLabel(self.group_condition)
-        self.label_condition_img.setGeometry(QtCore.QRect(10, 0, 771, 271))
+        self.label_condition_img.setGeometry(QtCore.QRect(0, 0, 771, 271))
         # self.label_condition_img.setStyleSheet("font: 30pt \"돋움\";")
         self.label_condition_img.setAutoFillBackground(True)
         self.label_condition_img.setPixmap(QtGui.QPixmap(save+"label_condition_img.jpg"))
         self.label_condition_img.setObjectName("label_condition_img")
 
         self.label_con_1 = QtWidgets.QLabel(self.group_condition)
-        #라벨위치바꿈 ()
-        self.label_con_1.setGeometry(QtCore.QRect(270, 20, 61, 31))
+        self.label_con_1.setGeometry(QtCore.QRect(250, 20, 61, 31))
         self.label_con_1.setStyleSheet("font: 20pt \"돋움\";")
         self.label_con_1.setObjectName("label_con_1")
 
         self.label_con_2 = QtWidgets.QLabel(self.group_condition)
-        self.label_con_2.setGeometry(QtCore.QRect(660, 20, 71, 31))
+        self.label_con_2.setGeometry(QtCore.QRect(645, 20, 71, 31))
         self.label_con_2.setStyleSheet("font: 20pt \"돋움\";")
         self.label_con_2.setObjectName("label_con_2")
 
-        #라벨위치바꿈
         self.label_con_3 = QtWidgets.QLabel(self.group_condition)
         self.label_con_3.setGeometry(QtCore.QRect(60, 110, 121, 101))
         self.label_con_3.setStyleSheet("font: 30pt \"돋움\";")
@@ -105,19 +103,87 @@ class Ui_MainWindow(object):
 
         # 홈 - 개요/예방수칙
         self.group_view = QtWidgets.QGroupBox(self.home)
-        self.group_view.setGeometry(QtCore.QRect(0, 280, 781, 481))
+        self.group_view.setGeometry(QtCore.QRect(0, 270, 781, 500))
         self.group_view.setTitle("")
         self.group_view.setObjectName("group_view")
-            # 개요
-        self.home_view_1 = QtWidgets.QLabel(self.group_view)
-        self.home_view_1.setGeometry(QtCore.QRect(40, 40, 711, 151))
-        self.home_view_1.setStyleSheet("font: 30pt \"돋움\";")
-        self.home_view_1.setObjectName("home_view_1")
+
+            # 개요/예방수칙 BGimg
+        self.home_view_part = QtWidgets.QStackedWidget(self.home)
+        self.home_view_part.setGeometry(QtCore.QRect(0, 270, 781, 500))
+        self.home_view_part.setObjectName("home_view_part")
+        self.home_view_part_1 = QtWidgets.QWidget()
+        self.home_view_part_1.setObjectName("home_view_part_1")
+            # 개요 1
+        self.label_home_view_part_1 = QtWidgets.QLabel(self.home_view_part_1)
+        self.label_home_view_part_1.setGeometry(QtCore.QRect(0,0,781,510))
+        self.label_home_view_part_1.setAutoFillBackground(True)
+        self.label_home_view_part_1.setPixmap(QtGui.QPixmap(save+"home_view_part1.jpg"))
+        self.label_home_view_part_1.setGeometry(QtCore.QRect(0, 0, 781, 510))
+        self.label_home_view_part_1.setObjectName("label_home_view_part_1")
+
+            # 개요 > 예방수칙 바로가기
+        self.pb_home_part1_1 = QtWidgets.QPushButton(self.home_view_part_1)
+        self.pb_home_part1_1.setGeometry(QtCore.QRect(600, 410, 171, 31))
+        self.pb_home_part1_1.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.pb_home_part1_1.setObjectName("pb_home_part1_1")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(save+"pb_home_view_part1.jpg"))
+        self.pb_home_part1_1.setIcon(icon)
+        self.pb_home_part1_1.setIconSize(QtCore.QSize(200,300))
+
+                # 개요 > 사이트 바로가기
+        self.pb_home_part1_2 = QtWidgets.QPushButton(self.home_view_part_1)
+        self.pb_home_part1_2.setGeometry(QtCore.QRect(600, 450, 171, 31))
+        self.pb_home_part1_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.pb_home_part1_2.setObjectName("pb_home_part1_2")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(save+"pb_home_view_part2.jpg"))
+        self.pb_home_part1_2.setIcon(icon)
+        self.pb_home_part1_2.setIconSize(QtCore.QSize(200,300))
+
+        self.home_view_part.addWidget(self.home_view_part_1)
+
+            # 개요 2
+        self.home_view_part_2 = QtWidgets.QWidget()
+        self.home_view_part_2.setObjectName("home_view_part_2")
+        self.label_home_view_part_2 = QtWidgets.QLabel(self.home_view_part_2)
+        self.label_home_view_part_2.setGeometry(QtCore.QRect(0,0,781,500))
+        self.label_home_view_part_2.setAutoFillBackground(True)
+        self.label_home_view_part_2.setPixmap(QtGui.QPixmap(save+"home_view_part2.jpg"))
+        self.label_home_view_part_2.setGeometry(QtCore.QRect(0, 0, 781, 500))
+        self.label_home_view_part_2.setObjectName("label_home_view_part_2")
+
+        self.pb_home_part2 = QtWidgets.QPushButton(self.home_view_part_2)
+        self.pb_home_part2.setGeometry(QtCore.QRect(600, 450, 171, 31))
+        self.pb_home_part2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+        self.pb_home_part2.setObjectName("pb_home_part2")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap(save+"pb_home_part2.jpg"))
+        self.pb_home_part2.setIcon(icon)
+        self.pb_home_part2.setIconSize(QtCore.QSize(200,300))
+        self.home_view_part.addWidget(self.home_view_part_2)
+        self.stackedWidget.addWidget(self.home)
+
             # 예방수칙
-        self.home_view_2 = QtWidgets.QLabel(self.group_view)
-        self.home_view_2.setGeometry(QtCore.QRect(40, 260, 711, 151))
-        self.home_view_2.setStyleSheet("font: 30pt \"돋움\";")
-        self.home_view_2.setObjectName("home_view_2")
+        # self.pushButton_home_part = QtWidgets.QPushButton(self.group_view)
+        # self.pushButton_home_part.setGeometry(QtCore.QRect(634,450,141,23))
+        # self.pushButton_home_part.setFlat(True)
+        # icon = QtGui.QIcon()
+        # icon.addPixmap(QtGui.QPixmap(save+"pushbutton_local.jpg"))
+        # self.pushButton_local.setIcon(icon)
+        # self.pushButton_local.setIconSize(QtCore.QSize(390,300))
+        # self.pushButton_home_part.setObjectName("pushButton_home_part")
+
+        #     # 개요
+        # self.home_view_1 = QtWidgets.QLabel(self.group_view)
+        # self.home_view_1.setGeometry(QtCore.QRect(20, 10, 781, 480))
+        # self.home_view_1.setStyleSheet("font: 11pt \"맑은 고딕\";")
+        # self.home_view_1.setObjectName("home_view_1")
+        #     # 예방수칙
+        # self.home_view_2 = QtWidgets.QLabel(self.group_view)
+        # self.home_view_2.setGeometry(QtCore.QRect(40, 260, 711, 151))
+        # self.home_view_2.setStyleSheet("font: 30pt \"돋움\";")
+        # self.home_view_2.setObjectName("home_view_2")
 
 
 
@@ -130,39 +196,42 @@ class Ui_MainWindow(object):
 
         # 메인-뷰3개
         self.main_category = QtWidgets.QStackedWidget(self.main)
-        self.main_category.setGeometry(QtCore.QRect(0, 0, 1000, 770))
+        self.main_category.setGeometry(QtCore.QRect(0, 0, 781, 761))
         self.main_category.setObjectName("main_category")
             # 로컬
         self.page_local = QtWidgets.QWidget()
         self.page_local.setObjectName("page_local")
         self.group_category_local = QtWidgets.QGroupBox(self.page_local)
-        self.group_category_local.setGeometry(QtCore.QRect(0, 10, 781, 71))
+        self.group_category_local.setGeometry(QtCore.QRect(0, 0, 781, 71))
         self.group_category_local.setTitle("")
         self.group_category_local.setObjectName("group_category_local")
 
         self.label_local_img = QtWidgets.QLabel(self.group_category_local)
-        self.label_local_img.setGeometry(QtCore.QRect(10, 10, 771, 41))
+        self.label_local_img.setGeometry(QtCore.QRect(0, 5, 781, 71))
         # self.label_local_img.setStyleSheet("font: 30pt \"돋움\";")
         self.label_local_img.setPixmap(QtGui.QPixmap(save+"category_local.jpg"))
         self.label_local_img.setObjectName("label_local_img")
 
 
         self.pushButton_category_local_1 = QtWidgets.QPushButton(self.group_category_local)
-        self.pushButton_category_local_1.setGeometry(QtCore.QRect(10, 10, 141, 51))
+        self.pushButton_category_local_1.setGeometry(QtCore.QRect(10, 15, 141, 51))
+        self.pushButton_category_local_1.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.pushButton_category_local_1.setFlat(True)
         self.pushButton_category_local_1.setObjectName("pushButton_category_local_1")
         self.pushButton_category_local_2 = QtWidgets.QPushButton(self.group_category_local)
-        self.pushButton_category_local_2.setGeometry(QtCore.QRect(190, 10, 141, 51))
+        self.pushButton_category_local_2.setGeometry(QtCore.QRect(190, 15, 141, 51))
+        self.pushButton_category_local_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.pushButton_category_local_2.setFlat(True)
         self.pushButton_category_local_2.setObjectName("pushButton_category_local_2")
         self.pushButton_category_local_3 = QtWidgets.QPushButton(self.group_category_local)
-        self.pushButton_category_local_3.setGeometry(QtCore.QRect(370, 10, 141, 51))
+        self.pushButton_category_local_3.setGeometry(QtCore.QRect(370, 15, 141, 51))
+        self.pushButton_category_local_3.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.pushButton_category_local_3.setFlat(True)
         self.pushButton_category_local_3.setObjectName("pushButton_category_local_3")
 
             # 로컬> 뷰페이지
         self.stackedWidget_local_view = QtWidgets.QStackedWidget(self.page_local)
-        self.stackedWidget_local_view.setGeometry(QtCore.QRect(20, 90, 760, 680))
+        self.stackedWidget_local_view.setGeometry(QtCore.QRect(20, 90, 741, 661))
         self.stackedWidget_local_view.setObjectName("stackedWidget_local_view")
             # 뷰1
         self.view_daily_chart = QtWidgets.QWidget()
@@ -194,16 +263,16 @@ class Ui_MainWindow(object):
         self.page_world = QtWidgets.QWidget()
         self.page_world.setObjectName("page_world")
         self.group_category_world = QtWidgets.QGroupBox(self.page_world)
-        self.group_category_world.setGeometry(QtCore.QRect(0, 10, 781, 71))
+        self.group_category_world.setGeometry(QtCore.QRect(0, 0, 781, 71))
         self.group_category_world.setTitle("")
         self.group_category_world.setObjectName("group_category_world")
         self.label_world_img = QtWidgets.QLabel(self.group_category_world)
-        self.label_world_img.setGeometry(QtCore.QRect(10, 10, 771, 41))
+        self.label_world_img.setGeometry(QtCore.QRect(0, 5, 781, 71))
         # self.label_world_img.setStyleSheet("font: 30pt \"돋움\";")
         self.label_world_img.setPixmap(QtGui.QPixmap(save+"category_world.jpg"))
         self.label_world_img.setObjectName("label_world_img")
         self.pushButton_category_world = QtWidgets.QPushButton(self.group_category_world)
-        self.pushButton_category_world.setGeometry(QtCore.QRect(20, 10, 171, 51))
+        self.pushButton_category_world.setGeometry(QtCore.QRect(10, 15, 155, 51))
         self.pushButton_category_world.setFlat(True)
         self.pushButton_category_world.setObjectName("pushButton_category_world")
 
@@ -219,17 +288,17 @@ class Ui_MainWindow(object):
         self.page_map = QtWidgets.QWidget()
         self.page_map.setObjectName("page_map")
         self.group_category_map = QtWidgets.QGroupBox(self.page_map)
-        self.group_category_map.setGeometry(QtCore.QRect(0, 10, 781, 71))
+        self.group_category_map.setGeometry(QtCore.QRect(0, 0, 781, 71))
         self.group_category_map.setTitle("")
         self.group_category_map.setObjectName("group_category_map")
         self.label_map_img = QtWidgets.QLabel(self.group_category_map)
-        self.label_map_img.setGeometry(QtCore.QRect(10, 10, 771, 41))
+        self.label_map_img.setGeometry(QtCore.QRect(0, 5, 781, 71))
         # self.label_map_img.setStyleSheet("font: 30pt \"돋움\";")
         self.label_map_img.setPixmap(QtGui.QPixmap(save+"category_map.jpg"))
         self.label_map_img.setObjectName("label_map_img")
 
         self.pushButton_category_map = QtWidgets.QPushButton(self.group_category_map)
-        self.pushButton_category_map.setGeometry(QtCore.QRect(20, 10, 171, 51))
+        self.pushButton_category_map.setGeometry(QtCore.QRect(10, 15, 160, 51))
         self.pushButton_category_map.setFlat(True)
         self.pushButton_category_map.setObjectName("pushButton_category_map")
                 # 지도 뷰 (웹뷰)
@@ -242,7 +311,10 @@ class Ui_MainWindow(object):
 
         self.stackedWidget.addWidget(self.main) # -- 메인 위젯 끝
 
-        # 제일 큰 푸쉬버튼들
+
+
+
+        ######## 제일 큰 푸쉬버튼들
 
         self.group_pushButton = QtWidgets.QGroupBox(self.centralwidget)
         self.group_pushButton.setGeometry(QtCore.QRect(10, 10, 411, 771))
@@ -251,6 +323,9 @@ class Ui_MainWindow(object):
             # 국내현황 푸쉬버튼
         self.pushButton_local = QtWidgets.QPushButton(self.group_pushButton)
         self.pushButton_local.setGeometry(QtCore.QRect(10, 170, 391, 191))
+        self.pushButton_local.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
+
+
                 # ---이미지
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(save+"pushbutton_local.jpg"))
@@ -262,6 +337,7 @@ class Ui_MainWindow(object):
             # 세계현황 푸쉬버튼
         self.pushButton_world = QtWidgets.QPushButton(self.group_pushButton)
         self.pushButton_world.setGeometry(QtCore.QRect(10, 375, 391, 191))
+        self.pushButton_world.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(save+"pushButton_world.jpg"))
         self.pushButton_world.setIcon(icon)
@@ -270,6 +346,7 @@ class Ui_MainWindow(object):
             # 지도 푸쉬버튼
         self.pushButton_map = QtWidgets.QPushButton(self.group_pushButton)
         self.pushButton_map.setGeometry(QtCore.QRect(10, 580, 391, 191))
+        self.pushButton_map.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(save+"pushButton_map.jpg"))
         self.pushButton_map.setIcon(icon)
@@ -293,7 +370,6 @@ class Ui_MainWindow(object):
 
 
         MainWindow.setCentralWidget(self.centralwidget)
-
 
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1273, 21))
@@ -325,8 +401,8 @@ class Ui_MainWindow(object):
         self.label_con_8.setText(_translate("MainWindow", "전일대비"))
         self.label_con_9.setText(_translate("MainWindow", "전일대비"))
         self.label_con_10.setText(_translate("MainWindow", "전일대비"))
-        self.home_view_1.setText(_translate("MainWindow", "개요"))
-        self.home_view_2.setText(_translate("MainWindow", "예방수칙"))
+        # self.home_view_1.setText(_translate("MainWindow", "개요"))
+        # self.home_view_2.setText(_translate("MainWindow", "예방수칙"))
         # self.labe_local_img.setText(_translate("MainWindow", "카테고리(국내현황)"))
         # self.pushButton_category_local_1.setText(_translate("MainWindow", "일별"))
         # self.pushButton_category_local_2.setText(_translate("MainWindow", "누적"))
@@ -338,7 +414,7 @@ class Ui_MainWindow(object):
         # self.pushButton_category_world.setText(_translate("MainWindow", "나라별 통계"))
         self.label_world_view.setText(_translate("MainWindow", "해외 뷰"))
         # self.label_map_img.setText(_translate("MainWindow", "카테고리(지도)"))
-        self.pushButton_category_map.setText(_translate("MainWindow", "map"))
+        # self.pushButton_category_map.setText(_translate("MainWindow", "map"))
 
         # self.pushButton_local.setText(_translate("MainWindow", "국내현황"))
         # self.pushButton_world.setText(_translate("MainWindow", "해외현황"))

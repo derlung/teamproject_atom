@@ -48,7 +48,7 @@ class pie_chart(QWidget):
     def getMain(self):
         list = []
         list.append(today_definite)
-        list.append(today_treate)
+        list.append(today_treat)
         list.append(total)
         list.append(definite)
         list.append(treat)

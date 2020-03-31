@@ -11,12 +11,8 @@ import re
 import datetime
 from UI_Main import Ui_MainWindow
 import sys, io
-import daily_chart1
-import total_chart1
-import world_page
-import bar
-import pie
-##3월 31일 최종합침(지도빼고)
+from PyQt5.QtMultimedia import QSound
+
 
 sys.stdout = io.TextIOWrapper(sys.stdout.detach(),encoding='utf-8')
 sys.stderr = io.TextIOWrapper(sys.stderr.detach(),encoding='utf-8')
@@ -34,16 +30,7 @@ class Main(QMainWindow,Ui_MainWindow):
         self.stackedWidget.setCurrentIndex(0)
         self.stackedWidget_local_view.setCurrentIndex(0)
 
-        #차트 붙이기
-        self.chart1=daily_chart1.daily_chart(self.view_daily_chart)
-        self.chart2=total_chart1.total_chart(self.view_total_chart)
-        world_bar=world_page.page_world(self.page_world)
-        domestic_pie=pie.pie_chart(self.page_local_view_3)
-        domestic_bar=bar.bar_chart(self.page_local_view_3)
-        world_bar.setGeometry(QRect(50,150,700,700))
-        #메인
-        main_list = domestic_pie.getMain()
-        self.init_main(main_list)
+
 
     def initSignal(self) :
     #----- push버튼 3종세트
@@ -70,18 +57,6 @@ class Main(QMainWindow,Ui_MainWindow):
         self.pb_home_part1_1.clicked.connect(self.home_part_2)
         self.pb_home_part2.clicked.connect(self.home_part_1)
 
-
-    def init_main(self,list):
-        self.label_con_1.setText(list[0])
-        self.label_con_2.setText(list[1])
-        self.label_con_3.setText("<font color=white>"+list[2][4:]+"</font>")
-        self.label_con_4.setText("<font color=white>"+list[3]+"</font>")
-        self.label_con_5.setText("<font color=white>"+list[4]+"</font>")
-        self.label_con_6.setText("<font color=white>"+list[5]+"</font>")
-        self.label_con_7.setText("<font color=white>"+list[6][4:]+"</font>")
-        self.label_con_8.setText("<font color=white>"+list[7]+"</font>")
-        self.label_con_10.setText("<font color=white>"+list[8]+"</font>")
-        self.label_con_9.setText("<font color=white>"+list[9]+"</font>")
 
 
     # 홈/메인 전환

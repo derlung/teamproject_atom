@@ -25,9 +25,9 @@ check=soup.select_one("body > div > div.mainlive_container > div.container > div
 check_finish=soup.select_one("body > div > div.mainlive_container > div.container > div > div.liveboard_layout > div.liveToggleOuter > div > div.live_left > div.liveTest.main_box_toggle > div.info_core > ul > li:nth-child(2) > span.num").text
 definite_total=soup.select_one("body > div > div.mainlive_container > div.container > div > div.liveboard_layout > div.liveToggleOuter > div > div.live_left > div.liveTest.main_box_toggle > div.info_core > ul > li:nth-child(3) > span.num").text
 
-treatment=soup.select_one("body > div > div.mainlive_container > div.container > div > div.liveboard_layout > div.liveToggleOuter > div > div.live_left > div.liveTest.main_box_toggle > div.chart_d > div > p.numinfo1 > span.num_rnum").text
-positive=soup.select_one("body > div > div.mainlive_container > div.container > div > div.liveboard_layout > div.liveToggleOuter > div > div.live_left > div.liveTest.main_box_toggle > div.chart_d > div > p.numinfo2 > span.num_rnum").text
-negative=soup.select_one("body > div > div.mainlive_container > div.container > div > div.liveboard_layout > div.liveToggleOuter > div > div.live_left > div.liveTest.main_box_toggle > div.chart_d > div > p.numinfo3 > span.num_rnum").text
+# treatment=soup.select_one("body > div > div.mainlive_container > div.container > div > div.liveboard_layout > div.liveToggleOuter > div > div.live_left > div.liveTest.main_box_toggle > div.chart_d > div > p.numinfo1 > span.num_rnum").text
+# positive=soup.select_one("body > div > div.mainlive_container > div.container > div > div.liveboard_layout > div.liveToggleOuter > div > div.live_left > div.liveTest.main_box_toggle > div.chart_d > div > p.numinfo2 > span.num_rnum").text
+# negative=soup.select_one("body > div > div.mainlive_container > div.container > div > div.liveboard_layout > div.liveToggleOuter > div > div.live_left > div.liveTest.main_box_toggle > div.chart_d > div > p.numinfo3 > span.num_rnum").text
 
 yesterday=soup.select_one("body > div > div.mainlive_container > div.container > div > div.liveboard_layout > div.liveNumOuter > div > ul > li:nth-child(1) > span.before").text
 yesterday_recovery=soup.select_one("body > div > div.mainlive_container > div.container > div > div.liveboard_layout > div.liveNumOuter > div > ul > li:nth-child(2) > span.before").text
@@ -58,9 +58,9 @@ print('사망 : '+death)
 print('누적 검사 수 : '+check)
 print('누적 검사 완료 수 : '+check_finish)
 print('누적 확진률 : '+definite_total)
-print('검사 중 : '+treatment)
-print('결과 양성 : '+positive)
-print('결과 음성 : '+negative)
+# print('검사 중 : '+treatment)
+# print('결과 양성 : '+positive)
+# print('결과 음성 : '+negative)
 print('남성비 : '+gender_m)
 print('여성비 : '+gender_w)
 print('30대 치사율 : '+death_ratio_30)
