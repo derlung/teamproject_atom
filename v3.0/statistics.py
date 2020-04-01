@@ -44,15 +44,18 @@ url="http://ncov.mohw.go.kr/bdBoardList_Real.do?brdId=1&brdGubun=11&ncvContSeq=&
 res=req.urlopen(url).read()
 soup=BeautifulSoup(res, "html.parser")
 
-gender_m=soup.select_one("#content > div > div.data_table.tbl_scrl_mini2.mini > table > tbody > tr:nth-child(2) > td:nth-child(4)").string
-gender_w=soup.select_one("#content > div > div.data_table.tbl_scrl_mini2.mini > table > tbody > tr:nth-child(3) > td:nth-child(3)").string
+gender_m=soup.select_one("#content > div > div:nth-child(16) > table > tbody > tr:nth-child(1) > td:nth-child(3) > span:nth-child(1)").text
+gender_w=soup.select_one("#content > div > div:nth-child(16) > table > tbody > tr:nth-child(2) > td:nth-child(3) > span:nth-child(1)").text
 
-death_ratio_30=soup.select_one("#content > div > div.data_table.tbl_scrl_mini2.mini > table > tbody > tr:nth-child(10) > td:nth-child(4)").string
-death_ratio_40=soup.select_one("#content > div > div.data_table.tbl_scrl_mini2.mini > table > tbody > tr:nth-child(11) > td:nth-child(3)").string
-death_ratio_50=soup.select_one("#content > div > div.data_table.tbl_scrl_mini2.mini > table > tbody > tr:nth-child(12) > td:nth-child(3)").string
-death_ratio_60=soup.select_one("#content > div > div.data_table.tbl_scrl_mini2.mini > table > tbody > tr:nth-child(13) > td:nth-child(3)").string
-death_ratio_70=soup.select_one("#content > div > div.data_table.tbl_scrl_mini2.mini > table > tbody > tr:nth-child(14) > td:nth-child(3)").string
-death_ratio_80=soup.select_one("#content > div > div.data_table.tbl_scrl_mini2.mini > table > tbody > tr:nth-child(15) > td:nth-child(3)").string
+
+
+death_ratio_30=soup.select_one("#content > div > div:nth-child(19) > table > tbody > tr:nth-child(6) > td:nth-child(4) > span").string
+death_ratio_40=soup.select_one("#content > div > div:nth-child(19) > table > tbody > tr:nth-child(5) > td:nth-child(4) > span").string
+death_ratio_50=soup.select_one("#content > div > div:nth-child(19) > table > tbody > tr:nth-child(4) > td:nth-child(4) > span").string
+death_ratio_60=soup.select_one("#content > div > div:nth-child(19) > table > tbody > tr:nth-child(3) > td:nth-child(4) > span").string
+death_ratio_70=soup.select_one("#content > div > div:nth-child(19) > table > tbody > tr:nth-child(2) > td:nth-child(4) > span").string
+death_ratio_80=soup.select_one("#content > div > div:nth-child(19) > table > tbody > tr:nth-child(1) > td:nth-child(4) > span").string
+
 
 
 # print('확진환자 : '+total)

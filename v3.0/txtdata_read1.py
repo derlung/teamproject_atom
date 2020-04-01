@@ -45,7 +45,8 @@ class txtdata:
         now = datetime.now()
         lastdate = self.lines[len(self.lines)-1][:6]
         today = str(now.month)+"월 "+str(now.day)+"일"
-        last = datetime.strptime(lastdate,"%m월 %d일")
+        l = lastdate.strip()
+        last = datetime.strptime(l,"%m월 %d일")
         toda = datetime.strptime(today,"%m월 %d일")
         if toda<=last :
             return
@@ -141,3 +142,6 @@ class txtdata:
         self.max_tdef=max(definite_t)
         self.max_ttre=max(treate_t)
         self.max_tdeth=max(death_t)
+
+if __name__=="__main__":
+    window = txtdata()
